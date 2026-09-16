@@ -4,6 +4,12 @@ A distraction-free, local-first Markdown editor for macOS, Windows, and Linux. B
 
 Vellum keeps your writing in plain `.md` files on your own disk — no accounts, no cloud, no telemetry.
 
+## Download
+
+Prebuilt installers for macOS, Windows, and Linux are attached to each
+[release](https://github.com/audiac/vellum/releases). Or build from source
+(see [Development](#development)).
+
 ## Features
 
 - **Live syntax styling** — headings, bold, italic, inline code, code blocks, blockquotes, links, and lists are styled as you type.
