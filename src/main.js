@@ -26,11 +26,13 @@ app.on('before-quit', () => {
 // Must be registered before whenReady — macOS can emit this during launch.
 app.on('open-file', (event, filePath) => {
   event.preventDefault();
-  if (!app.isReady() || !mainWindow || mainWindow.isDestroyed()) {
+  // Before the app is ready there's no window yet and nowhere to deliver the
+  // path, so queue it for whenReady to pick up during cold start.
+  if (!app.isReady()) {
     pendingOpenPath = filePath;
     return;
   }
-  mainWindow.webContents.send('app:open-path', filePath);
+  deliverOpenPath(filePath);
 });
 
 // Packaged builds get their icon from the .app bundle itself (this file
@@ -72,6 +74,21 @@ const createWindow = () => {
 
   return mainWindow;
 };
+
+// Deliver an opened file's path to a window. macOS keeps the app alive with
+// all windows closed, so an 'open-file' can arrive after mainWindow has been
+// destroyed — recreate the window and wait for the renderer to load before
+// sending, instead of dropping the path.
+function deliverOpenPath(filePath) {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.webContents.send('app:open-path', filePath);
+    return;
+  }
+  const win = createWindow();
+  win.webContents.once('did-finish-load', () => {
+    win.webContents.send('app:open-path', filePath);
+  });
+}
 
 // macOS keeps the app (and its menu bar) alive with no windows open, so a
 // menu click can arrive after mainWindow has been destroyed — lazily

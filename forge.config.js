@@ -9,6 +9,10 @@ const entitlementsPath = path.join(__dirname, 'build/entitlements.mac.plist');
 module.exports = {
   packagerConfig: {
     asar: true,
+    // The deb/rpm makers look for the executable by the lowercase package
+    // name ("vellum"); without this the packager names it "Vellum" (from
+    // productName) and the Linux makers fail to find the binary.
+    executableName: 'vellum',
     icon: path.join(__dirname, 'build/icons/icon'),
     // @electron/osx-sign's per-binary deep-signing leaves the nested
     // "Electron Framework" with its original (non-ad-hoc) signature in this
