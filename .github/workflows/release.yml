@@ -58,8 +58,16 @@ jobs:
         with:
           path: artifacts
 
-      - name: Attach to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: artifacts/**/*
-          fail_on_unmatched_files: false
+      # Publish with the gh CLI rather than softprops/action-gh-release, which
+      # intermittently failed with "Error creating asset temp dir" (it mishandles
+      # asset filenames containing spaces, e.g. "Vellum-1.1.2 Setup.exe").
+      # -print0 | xargs -0 preserves those spaces when uploading.
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+                 --title "$GITHUB_REF_NAME" --generate-notes
+          find artifacts -type f -print0 \
+            | xargs -0 gh release upload "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --clobber
