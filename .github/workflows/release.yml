@@ -58,10 +58,11 @@ jobs:
         with:
           path: artifacts
 
-      # Publish with the gh CLI rather than softprops/action-gh-release, which
-      # intermittently failed with "Error creating asset temp dir" (it mishandles
-      # asset filenames containing spaces, e.g. "Vellum-1.1.2 Setup.exe").
-      # -print0 | xargs -0 preserves those spaces when uploading.
+      # Publish with the gh CLI. GitHub's upload API intermittently returns
+      # "HTTP 500: Error creating asset temp dir", so upload each asset on its
+      # own with retries rather than in one call that a single 500 would abort.
+      # mapfile -d '' (not a pipe) keeps the loop in this shell so a final
+      # failure fails the step, and handles filenames with spaces.
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -69,5 +70,19 @@ jobs:
           gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
             || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
                  --title "$GITHUB_REF_NAME" --generate-notes
-          find artifacts -type f -print0 \
-            | xargs -0 gh release upload "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --clobber
+          mapfile -d '' files < <(find artifacts -type f -print0)
+          for f in "${files[@]}"; do
+            for attempt in 1 2 3 4 5; do
+              if gh release upload "$GITHUB_REF_NAME" "$f" \
+                   --repo "$GITHUB_REPOSITORY" --clobber; then
+                echo "uploaded $(basename "$f")"
+                break
+              fi
+              if [ "$attempt" -eq 5 ]; then
+                echo "::error::failed to upload $(basename "$f") after 5 attempts"
+                exit 1
+              fi
+              echo "upload of $(basename "$f") failed (attempt $attempt); retrying in 15s"
+              sleep 15
+            done
+          done
