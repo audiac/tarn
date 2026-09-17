@@ -45,8 +45,21 @@ jobs:
           name: vellum-${{ matrix.name }}
           path: out/make/**/*
 
+  # Publish once, after all platform builds finish. Attaching from within the
+  # build matrix instead made the three jobs race each other creating the same
+  # release and uploading assets concurrently, which failed intermittently
+  # ("Error creating asset temp dir" / "Error saving asset").
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
       - name: Attach to release
         uses: softprops/action-gh-release@v2
         with:
-          files: out/make/**/*
+          files: artifacts/**/*
           fail_on_unmatched_files: false
