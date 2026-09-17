@@ -6,17 +6,15 @@ Vellum keeps your writing in plain `.md` files on your own disk — no accounts,
 
 ## Download
 
-Latest release: **v1.1.2**
+Get the newest installers from the
+**[latest release](https://github.com/audiac/vellum/releases/latest)**:
 
-| Platform | Download |
-| --- | --- |
-| macOS (Apple Silicon) | [Vellum-darwin-arm64-1.1.2.zip](https://github.com/audiac/vellum/releases/download/v1.1.2/Vellum-darwin-arm64-1.1.2.zip) |
-| Windows | [Vellum-1.1.2.Setup.exe](https://github.com/audiac/vellum/releases/download/v1.1.2/Vellum-1.1.2.Setup.exe) |
-| Linux (Debian/Ubuntu) | [vellum_1.1.2_amd64.deb](https://github.com/audiac/vellum/releases/download/v1.1.2/vellum_1.1.2_amd64.deb) |
-| Linux (Fedora/RHEL) | [vellum-1.1.2-1.x86_64.rpm](https://github.com/audiac/vellum/releases/download/v1.1.2/vellum-1.1.2-1.x86_64.rpm) |
+- **macOS** (Apple Silicon) — `Vellum-darwin-arm64-*.zip`
+- **Windows** — `Vellum-*.Setup.exe`
+- **Linux** — `vellum_*_amd64.deb` (Debian/Ubuntu) or `vellum-*.x86_64.rpm` (Fedora/RHEL)
 
-See [all releases](https://github.com/audiac/vellum/releases/latest), or build
-from source (see [Development](#development)).
+Or see [all releases](https://github.com/audiac/vellum/releases), or build from
+source (see [Development](#development)).
 
 > macOS builds are ad-hoc signed. If Gatekeeper warns on first launch,
 > right-click the app → **Open**.
