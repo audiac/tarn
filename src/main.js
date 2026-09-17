@@ -141,6 +141,17 @@ ipcMain.on('app:set-toggle-checked', (_event, checked) => {
   if (menu) setToggleChecked(menu, checked);
 });
 
+// The renderer closed its last tab and already handled any unsaved changes,
+// so close the window (or quit, if this was a quit) without prompting again.
+ipcMain.on('app:close-window', () => {
+  closeConfirmed = true;
+  if (isQuitting) {
+    app.quit();
+  } else if (mainWindow) {
+    mainWindow.close();
+  }
+});
+
 ipcMain.on('app:close-response', (_event, shouldClose) => {
   if (!shouldClose) {
     // User cancelled — if this was triggered by Cmd+Q/Quit, don't leave the

@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('api', {
   confirmDiscardChanges: () => ipcRenderer.invoke('file:confirm-discard'),
   setSyntaxToggleChecked: (checked) => ipcRenderer.send('app:set-toggle-checked', checked),
   respondBeforeClose: (shouldClose) => ipcRenderer.send('app:close-response', shouldClose),
+  closeWindow: () => ipcRenderer.send('app:close-window'),
   onMenuAction: (callback) => {
     const listener = (_event, action) => callback(action);
     ipcRenderer.on('menu:action', listener);

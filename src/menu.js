@@ -16,10 +16,28 @@ export function buildMenu(send) {
           click: () => send('save-as'),
         },
         { type: 'separator' },
-        process.platform === 'darwin' ? { role: 'close' } : { role: 'quit' },
+        { label: 'Close Tab', accelerator: 'CmdOrCtrl+W', click: () => send('close-tab') },
+        process.platform === 'darwin'
+          ? { role: 'close', accelerator: 'CmdOrCtrl+Shift+W' }
+          : { role: 'quit' },
       ],
     },
     { label: 'Edit', role: 'editMenu' },
+    {
+      label: 'Window',
+      submenu: [
+        {
+          label: 'Next Tab',
+          accelerator: 'Ctrl+Tab',
+          click: () => send('next-tab'),
+        },
+        {
+          label: 'Previous Tab',
+          accelerator: 'Ctrl+Shift+Tab',
+          click: () => send('prev-tab'),
+        },
+      ],
+    },
     {
       label: 'View',
       submenu: [

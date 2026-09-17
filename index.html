@@ -6,8 +6,11 @@
   </head>
   <body>
     <div id="titlebar">
-      <span id="filename">Untitled.md</span>
-      <button id="toggle-syntax" type="button">Hide Syntax</button>
+      <div id="tabbar"></div>
+      <div id="titlebar-actions">
+        <button id="new-tab" type="button" title="New tab" aria-label="New tab">+</button>
+        <button id="toggle-syntax" type="button">Hide Syntax</button>
+      </div>
     </div>
     <div id="editor"></div>
     <script type="module" src="/src/renderer.js"></script>

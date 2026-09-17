@@ -6,8 +6,6 @@ import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language'
 
 import { hideSyntaxCompartment, buildHideSyntaxExtension } from './hideSyntax.js';
 
-export const hideSyntaxState = { hidden: false };
-
 export function createEditorView({ doc, parent, onDocChanged }) {
   const state = EditorState.create({
     doc,
@@ -30,12 +28,12 @@ export function createEditorView({ doc, parent, onDocChanged }) {
   return new EditorView({ state, parent });
 }
 
-export function toggleSyntaxVisibility(view) {
-  hideSyntaxState.hidden = !hideSyntaxState.hidden;
+// Syntax visibility is tracked per tab in the renderer, so this just applies
+// the requested state to a given view rather than owning a shared flag.
+export function applySyntaxHidden(view, hidden) {
   view.dispatch({
     effects: hideSyntaxCompartment.reconfigure(
-      hideSyntaxState.hidden ? buildHideSyntaxExtension() : [],
+      hidden ? buildHideSyntaxExtension() : [],
     ),
   });
-  return hideSyntaxState.hidden;
 }
