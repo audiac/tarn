@@ -12,6 +12,7 @@ Prebuilt installers for macOS, Windows, and Linux are attached to each
 
 ## Features
 
+- **Tabs** — open multiple documents at once and switch between them. Opening a file (via Open, the `+` button, or "Open With" in Finder) adds a new tab instead of replacing the current document; each tab keeps its own file, unsaved-changes state, and Hide Syntax setting.
 - **Live syntax styling** — headings, bold, italic, inline code, code blocks, blockquotes, links, and lists are styled as you type.
 - **Hide Syntax mode** (`Cmd/Ctrl+Shift+M`) — hide the Markdown markers for a clean, rendered-looking view while still editing the raw text.
 - **Plain-file workflow** — New, Open, Save, and Save As work directly with `.md` and `.markdown` files.
@@ -23,10 +24,13 @@ Prebuilt installers for macOS, Windows, and Linux are attached to each
 
 | Action | Shortcut |
 | --- | --- |
-| New file | `Cmd/Ctrl+N` |
+| New tab | `Cmd/Ctrl+N` |
 | Open | `Cmd/Ctrl+O` |
 | Save | `Cmd/Ctrl+S` |
 | Save As | `Cmd/Ctrl+Shift+S` |
+| Close tab | `Cmd/Ctrl+W` |
+| Close window | `Cmd/Ctrl+Shift+W` |
+| Next / Previous tab | `Ctrl+Tab` / `Ctrl+Shift+Tab` |
 | Toggle Hide Syntax | `Cmd/Ctrl+Shift+M` |
 
 ## Development
