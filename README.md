@@ -1,19 +1,19 @@
-# Vellum
+# Tarn
 
 A distraction-free, local-first Markdown editor for macOS, Windows, and Linux. Built with [Electron](https://www.electronjs.org/) and [CodeMirror 6](https://codemirror.net/).
 
-Vellum keeps your writing in plain `.md` files on your own disk — no accounts, no cloud, no telemetry.
+Tarn keeps your writing in plain `.md` files on your own disk — no accounts, no cloud, no telemetry.
 
 ## Download
 
 Get the newest installers from the
-**[latest release](https://github.com/audiac/vellum/releases/latest)**:
+**[latest release](https://github.com/audiac/tarn/releases/latest)**:
 
-- **macOS** (Apple Silicon) — `Vellum-darwin-arm64-*.zip`
-- **Windows** — `Vellum-*.Setup.exe`
-- **Linux** — `vellum_*_amd64.deb` (Debian/Ubuntu) or `vellum-*.x86_64.rpm` (Fedora/RHEL)
+- **macOS** (Apple Silicon) — `Tarn-darwin-arm64-*.zip`
+- **Windows** — `Tarn-*.Setup.exe`
+- **Linux** — `tarn_*_amd64.deb` (Debian/Ubuntu) or `tarn-*.x86_64.rpm` (Fedora/RHEL)
 
-Or see [all releases](https://github.com/audiac/vellum/releases), or build from
+Or see [all releases](https://github.com/audiac/tarn/releases), or build from
 source (see [Development](#development)).
 
 > macOS builds are ad-hoc signed. If Gatekeeper warns on first launch,
@@ -53,7 +53,7 @@ npm start
 
 ## Building
 
-Vellum uses [Electron Forge](https://www.electronforge.io/).
+Tarn uses [Electron Forge](https://www.electronforge.io/).
 
 ```bash
 npm run package   # build an unpackaged app

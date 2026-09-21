@@ -10,12 +10,12 @@ module.exports = {
   packagerConfig: {
     asar: true,
     // The Linux deb/rpm makers require a lowercase binary named after the
-    // package ("vellum") — capitalized executables break `npm run make` on
+    // package ("tarn") — capitalized executables break `npm run make` on
     // Linux ("could not find the Electron app binary"). macOS and Windows
-    // have no such rule, so keep the user-visible "Vellum" there. Each CI
+    // have no such rule, so keep the user-visible "Tarn" there. Each CI
     // runner builds its own platform natively, so process.platform matches
     // the build target.
-    executableName: process.platform === 'linux' ? 'vellum' : 'Vellum',
+    executableName: process.platform === 'linux' ? 'tarn' : 'Tarn',
     icon: path.join(__dirname, 'build/icons/icon'),
     // @electron/osx-sign's per-binary deep-signing leaves the nested
     // "Electron Framework" with its original (non-ad-hoc) signature in this
@@ -27,8 +27,8 @@ module.exports = {
     extendInfo: {
       // Force the capitalized name in Finder / Get Info regardless of how the
       // packager derives it from executableName.
-      CFBundleName: 'Vellum',
-      CFBundleDisplayName: 'Vellum',
+      CFBundleName: 'Tarn',
+      CFBundleDisplayName: 'Tarn',
       CFBundleDocumentTypes: [
         {
           CFBundleTypeName: 'Markdown Document',

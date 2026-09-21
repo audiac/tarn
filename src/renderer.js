@@ -26,11 +26,11 @@ function updateToggleButton(hidden) {
 function updateActiveChrome() {
   const tab = getActiveTab();
   if (!tab) {
-    document.title = 'Vellum';
+    document.title = 'Tarn';
     return;
   }
   const dirtyMark = tab.isDirty ? '• ' : '';
-  document.title = `${dirtyMark}${tab.fileName} — Vellum`;
+  document.title = `${dirtyMark}${tab.fileName} — Tarn`;
   updateToggleButton(tab.syntaxHidden);
   window.api.setSyntaxToggleChecked(tab.syntaxHidden);
 }

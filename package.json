@@ -1,7 +1,7 @@
 {
-  "name": "vellum",
-  "productName": "Vellum",
-  "version": "1.1.2",
+  "name": "tarn",
+  "productName": "Tarn",
+  "version": "1.2.0",
   "description": "A distraction-free local markdown editor",
   "main": ".vite/build/main.js",
   "private": true,
