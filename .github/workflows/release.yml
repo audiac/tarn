@@ -1,6 +1,6 @@
 name: Release
 
-# Builds Vellum on macOS, Windows, and Linux and attaches the installers
+# Builds Tarn on macOS, Windows, and Linux and attaches the installers
 # to a GitHub Release whenever a version tag (e.g. v1.0.0) is pushed.
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: vellum-${{ matrix.name }}
+          name: tarn-${{ matrix.name }}
           path: out/make/**/*
 
   # Publish once, after all platform builds finish. Attaching from within the
